@@ -77,7 +77,14 @@ var Module = angular.module('datePicker', []);
           partial = !!attrs.partial,
           minDate = getDate('minDate'),
           maxDate = getDate('maxDate'),
-          pickerID = element[0].id,
+
+          /**
+           * [指令内包含date-picker指令时，通过element[0].id并不能获取到动态id]
+           * @type {[type]}
+           */
+          // pickerID = element[0].id,
+          pickerID = scope.$parent.id || element[0].id,
+
           now = scope.now = createMoment(),
           selected = scope.date = createMoment(scope.model || now),
           autoclose = attrs.autoClose === 'true',
